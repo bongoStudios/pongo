@@ -12,6 +12,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.stb.STBEasyFont.*;
 
 public class App {
     // The window handle
@@ -55,6 +56,22 @@ public class App {
 		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
 			if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 				glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
+			if( action == GLFW_RELEASE )
+				glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+			if ( key == GLFW_KEY_A && action == GLFW_PRESS )
+				glClearColor(1.0f, 0.5f, 0.0f, 1.0f);
+			if ( key == GLFW_KEY_S && action == GLFW_PRESS )
+				glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+			if ( key == GLFW_KEY_W && action == GLFW_PRESS )
+				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+			if ( key == GLFW_KEY_D && action == GLFW_PRESS )
+				glClearColor(0.0f, 0.5f, 1.0f, 1.0f);
+			if ( key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
+				ByteBuffer charBuffer = BufferUtils.createByteBuffer(text.length() * 270);
+				int quads = stb_easy_font_print(0, 0, "a", charBuffer);
+			}
+				
+				
 		});
 
 		// Get the thread stack and push a new frame
