@@ -10,6 +10,7 @@ import java.nio.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.stb.STBEasyFont.*;
@@ -66,12 +67,6 @@ public class App {
 				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			if ( key == GLFW_KEY_D && action == GLFW_PRESS )
 				glClearColor(0.0f, 0.5f, 1.0f, 1.0f);
-			if ( key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
-				ByteBuffer charBuffer = BufferUtils.createByteBuffer(text.length() * 270);
-				int quads = stb_easy_font_print(0, 0, "a", charBuffer);
-			}
-				
-				
 		});
 
 		// Get the thread stack and push a new frame
@@ -112,6 +107,14 @@ public class App {
 
 		// Set the clear color
 		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+
+		float vertices[] = {
+			0.0f,  0.5f, // Vertex 1 (X, Y)
+			0.5f, -0.5f, // Vertex 2 (X, Y)
+		   -0.5f, -0.5f  // Vertex 3 (X, Y)
+	   };
+	   int ass = glGenBuffers();
+	   glBindBuffer(GL_ARRAY_BUFFER, ass);
 
 		// Run the rendering loop until the user has attempted to close
 		// the window or has pressed the ESCAPE key.
